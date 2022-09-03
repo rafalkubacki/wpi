@@ -1,0 +1,25 @@
+#!/usr/bin/sh
+
+echo "------------------------------------------------------------"
+echo "Installing WordPress"
+echo "------------------------------------------------------------"
+
+docker-compose up -d mysql phpmyadmin wordpress
+
+echo "Waiting for WordPress to be installed ..."
+sleep 20
+until docker-compose run --rm wp-cli wp db check
+do 
+    echo "..."
+    sleep 5
+done
+
+echo "------------------------------------------------------------"
+echo "Configuring WordPress"
+echo "------------------------------------------------------------"
+
+docker-compose run --rm wp-cli sh -c 'sh /usr/local/bin/install-wp'
+
+echo "------------------------------------------------------------"
+echo "WordPress Ready!"
+echo "------------------------------------------------------------"

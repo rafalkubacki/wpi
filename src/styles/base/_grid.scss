@@ -1,0 +1,60 @@
+.row {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+
+  .row {
+    margin-right: -#{calc($gap / 2)};
+    margin-left: -#{calc($gap / 2)};
+    width: auto;
+  }
+
+  &.column {
+    display: block;
+  }
+
+  &--collapse {
+    > .#{$column-name} {
+      padding: 0;
+    }
+  }
+}
+
+.#{$column-name} {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: #{calc($gap / 2)};
+  padding-left: #{calc($gap / 2)};
+}
+
+@each $item in $breakpoints {
+  @for $i from 0 through $columns {
+    @include breakpoint(nth($item, 1) up) {
+      $br: nth($item, 4);
+
+      .#{$br}-#{$i} {
+        width: percentage(calc($i / $columns));
+      }
+
+      .#{$br}-fixed-#{$i} {
+        max-width: calc($max-width * $i / $columns);
+      }
+
+      .#{$br}-#{$offset-name}-#{$i} {
+        margin-left: percentage(calc($i / $columns));
+      }
+
+      .#{$br}-centered {
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .#{$br}-auto {
+        width: auto;
+      }
+    }
+  }
+}

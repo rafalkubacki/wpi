@@ -1,0 +1,48 @@
+{% include "parts/header.twig" %}
+
+    {% include "sections/test.twig" with {
+        title: "WPI",
+        content: "Wordpress Twig/Timber Theme"
+    } %}
+
+    {% if posts.pagination.current == 1 and sticky_post %}
+        <header class="main-header">
+            <div>
+                <a href={{sticky_post.link}}>
+                    {{sticky_post.title}}
+                </a>
+            </div>
+        </header>
+    {% endif %}
+
+    <div>
+        {% for post in posts %}
+            <div>
+                <a href={{post.link}}>
+                    {{post.title}}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="tool-pagination">
+        {% if posts.pagination.prev %}
+            <a href="{{posts.pagination.prev.link}}" class="prev {{posts.pagination.prev.link|length ? '' : 'invisible'}}">Prev</a>
+        {% endif %}
+        <ul class="pages">
+            {% for page in posts.pagination.pages %}
+                <li>
+                    {% if page.link %}
+                        <a href="{{page.link}}" class="{{page.class}}">{{page.title}}</a>
+                    {% else %}
+                        <span class="{{page.class}}">{{page.title}}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% if posts.pagination.next %}
+            <a href="{{posts.pagination.next.link}}" class="next {{posts.pagination.next.link|length ? '' : 'invisible'}}">Next</a>
+        {% endif %}
+    </div>
+
+{% include "parts/footer.twig" %}

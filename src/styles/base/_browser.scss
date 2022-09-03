@@ -1,0 +1,11 @@
+@media screen and (max-device-width: 480px) {
+  body {
+    text-size-adjust: none;
+  }
+}
+
+input {
+  &::-ms-clear {
+    display: none;
+  }
+}
