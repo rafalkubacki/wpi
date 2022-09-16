@@ -1,6 +1,17 @@
 #!/usr/bin/sh
 
 echo "------------------------------------------------------------"
+echo "Checking configuration"
+echo "------------------------------------------------------------"
+
+if [ ! -f ".env" ]; then
+    cp .env.example .env
+    echo "The .env file not found."
+    echo "It has been copied for you. Please edit the file before continuing!"
+    exit 1
+fi
+
+echo "------------------------------------------------------------"
 echo "Installing WordPress"
 echo "------------------------------------------------------------"
 
@@ -22,4 +33,12 @@ docker-compose run --rm wp-cli sh -c 'sh /usr/local/bin/install-wp'
 
 echo "------------------------------------------------------------"
 echo "WordPress Ready!"
+echo "------------------------------------------------------------"
+
+cd src
+npm install
+npm run dev
+
+echo "------------------------------------------------------------"
+echo "FrontEnd Ready!"
 echo "------------------------------------------------------------"
