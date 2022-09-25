@@ -51,7 +51,7 @@ services:
         volumes:
             - wp_data:/var/www/html:rw
             - ./configuration/apache2.conf:/etc/apache2/apache2.conf:ro
-            - ./plugins:/var/www/html/plugins
+            - ./plugins:/var/www/html/plugins:ro
             - ./theme:/var/www/html/wp-content/themes/${WORDPRESS_THEME_TO_INSTALL}:ro,cached
         networks:
             - wordpress-network
@@ -70,7 +70,7 @@ services:
         volumes:
             - wp_data:/var/www/html:rw
             - ./bin/install-wp.sh:/usr/local/bin/install-wp:ro
-            - ./plugins:/var/www/html/plugins
+            - ./plugins:/var/www/html/plugins:rw
             - ./theme:/var/www/html/wp-content/themes/${WORDPRESS_THEME_TO_INSTALL}:rw
         networks:
             - wordpress-network
