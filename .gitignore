@@ -1,3 +1,12 @@
+# Configuration
 .env
+
+# Utilities
+.DS_Store
+
+# Frontend
 src/node_modules
 src/package-lock.json
+
+# Backups
+/temp/*

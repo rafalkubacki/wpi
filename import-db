@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+set -a; source .env; set +a
+
+docker exec ${PWD##*/}-mysql-1 mysql -hmysql -uroot -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < temp/backup.sql
